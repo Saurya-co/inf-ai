@@ -1,0 +1,21 @@
+# --- Secrets & on-device runtime data (NEVER commit) ---
+# data/ holds preferences.json (encrypted API keys) + chat.db (history)
+/data/
+*.keystore
+*.jks
+*.key
+.env
+
+# --- Build outputs (regenerable, huge) ---
+/build/
+.flet/
+*.apk
+*.aab
+*.ipa
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/

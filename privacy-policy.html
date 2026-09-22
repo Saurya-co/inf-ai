@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — INF ai</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px;
+         margin: 2rem auto; padding: 0 1rem; line-height: 1.6; color: #111; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #101418; color: #e6e6e6; }
+  }
+</style>
+</head>
+<body>
+<h1>Privacy Policy — INF ai</h1>
+<p>Effective date: [DD Month YYYY]<br>Contact: [your support email]</p>
+
+<p>INF ai ("the App") is a bring-your-own-key (BYOK) AI study toolkit. This
+policy explains what data the App handles. The short version: <strong>we
+collect nothing — there is no account, no backend, no analytics, and no
+ads.</strong> Everything stays on your device except the messages you choose
+to send to your chosen AI provider.</p>
+
+<h2>1. Data we do NOT collect</h2>
+<p>No accounts, no sign-up, no email addresses. No analytics, crash reporting,
+tracking SDKs, or advertising identifiers. We (the developer) never see,
+receive, or store any of your data on any server, because there is no
+server.</p>
+
+<h2>2. Data stored on your device</h2>
+<p><strong>API keys:</strong> encrypted on your device (Fernet encryption under
+a random key kept in platform secure storage: Android Keystore / iOS Keychain /
+Windows Credential Manager). Keys are masked in the UI and never included in
+exports.<br>
+<strong>Chats &amp; attached files:</strong> stored in a local on-device
+database so your history works offline. They never leave the device except as
+described in Section 3.<br>
+<strong>App-lock PIN:</strong> only a salted PBKDF2 hash is stored — the PIN
+itself is never stored. Biometric unlock is gated by the operating system; no
+biometric data is accessed or stored by the App.<br>
+<strong>Settings</strong> (theme, selected model, preferences): stored locally
+only.</p>
+
+<h2>3. Data you choose to send (third parties)</h2>
+<p>When you tap Send, your message and any attached files/photos are transmitted
+over HTTPS <strong>directly to the AI provider you selected</strong> (e.g.
+Google, Groq, OpenRouter, Together, HuggingFace, DeepSeek, OpenAI, Anthropic,
+or your custom endpoint). For long documents, only the most relevant excerpts
+are sent. The provider authenticates you with the API key <strong>you</strong>
+pasted into the App. Each provider processes data under <strong>its
+own</strong> privacy policy — please review your provider's policy (e.g. data
+retention/training terms vary, including zero-retention options). We have no
+control over provider-side handling.</p>
+
+<h2>4. Device permissions</h2>
+<p><strong>Camera</strong> (optional): used only when you tap "Take photo" to
+attach a picture to your chat. Photos are processed on-device and sent only to
+your selected AI provider.<br>
+<strong>Biometric / device lock</strong> (optional): used only for the
+app-unlock feature you enable in Settings.<br>
+<strong>Internet:</strong> required to reach AI providers and fetch model
+lists. History, settings, and saved chats work offline.</p>
+
+<h2>5. Data retention &amp; deletion</h2>
+<p>Your data remains on your device until you delete it: individual chats can be
+deleted in History; "Forgot PIN" resets the lock and saved keys; uninstalling
+the App removes all local data (automatic backups are disabled for key
+material). Provider-side retention is governed by the provider's policy
+(Section 3).</p>
+
+<h2>6. Children</h2>
+<p>The App is intended for users aged 13 and older and is not directed at
+children under 13. No personal data from anyone — including children — is
+collected by the developer.</p>
+
+<h2>7. Security</h2>
+<p>Keys are encrypted at rest; transport to providers is HTTPS-only. No security
+method is perfect: a rooted/compromised device or someone with physical access
+to your unlocked device can access local data. Protect your device lock and
+never share your API keys.</p>
+
+<h2>8. Changes</h2>
+<p>Material changes to this policy will be reflected in an updated App release
+with a revised effective date above.</p>
+</body>
+</html>

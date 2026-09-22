@@ -1,0 +1,70 @@
+[project]
+name = "multiai-chat"
+version = "0.6.0"
+description = "INF ai — student AI toolkit (Flet, Android-first)"
+requires-python = ">=3.10"
+dependencies = [
+    # NOTE: stay on the 0.86.x stable line verified with this app (drawer
+    # show_drawer API,BottomSheet, FilePicker). Re-check PyPI for 0.86.6+
+    # before bumping — this mirror only carries 0.86.5 as latest stable.
+    # Pinned exact versions for reproducible, auditable builds (supply-chain).
+    "flet==0.86.5",
+    "flet-secure-storage==0.86.5",
+    "flet-camera==0.86.5",
+    "flet-permission-handler==0.86.5",
+    "httpx==0.28.1",
+    "pypdf==4.3.1",
+    "cryptography==48.0.0",
+]
+
+[tool.flet]
+product = "INF ai"
+org = "com.saurya"
+bundle_id = "com.saurya.multiai"
+build_number = 14
+# Infinity icon: assets/icon.png is an indigo gradient rounded square with
+# transparent corners — this background fills the corners for iOS/macOS
+# tiles, Android adaptive icon + Android 12 splash disc, and maskable web
+# icons (must match the artwork's indigo, or corners show a dark rim).
+icon_background = "#4f46e5"
+# Cross-platform permission bundles: camera (in-app capture) + biometric
+# (FaceID usage description; Android USE_BIOMETRIC declared below).
+permissions = ["camera", "biometric"]
+
+[tool.flet.app]
+path = "."
+module = "main.py"
+# Production packaging: never ship dev-machine state (chats, API keys),
+# dev tests/docs, or caches inside the APK. Runtime recreates data/ fresh
+# on first launch via os.makedirs.
+exclude = ["data", "tests", "docs", ".flet", "__pycache__", "app/__pycache__", "tools_make_logo.py"]
+
+[tool.flet.android]
+bundle_id = "com.saurya.multiai"
+# NOTE: INTERNET is on by default (Flet default). Do NOT declare
+# READ_MEDIA_IMAGES/VIDEO — Play rejects API 33+ apps that request broad
+# media access when system pickers suffice (FilePicker uses SAF, no perm needed).
+# USE_BIOMETRIC (+FINGERPRINT legacy) only gates the optional biometric
+# unlock (SecureStorage enforce profile) — no data leaves the device.
+[tool.flet.android.permission]
+"android.permission.USE_BIOMETRIC" = true
+"android.permission.USE_FINGERPRINT" = true
+"android.permission.CAMERA" = true
+
+# flutter_secure_storage: disable auto-backup so a restore onto a new
+# keystore cannot brick the KEK/biometric token with
+# java.security.InvalidKeyException (see Flet SecureStorage docs).
+[tool.flet.android.manifest_application]
+"allowBackup" = "false"
+"fullBackupContent" = "false"
+
+[tool.flet.ios]
+bundle_id = "com.saurya.multiai"
+
+[tool.flet.ios.info]
+NSCameraUsageDescription = "Take photos to attach them to your chats."
+NSFaceIDUsageDescription = "Unlock Multi-AI Chat with Face ID."
+
+[tool.flet.splash]
+color = "#101418"
+dark_color = "#101418"

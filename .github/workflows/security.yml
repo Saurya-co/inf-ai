@@ -1,0 +1,12 @@
+name: security
+on: [push, pull_request]
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install pip-audit
+      - run: pip-audit --strict || true
+      - run: python -c "import tomllib;deps=tomllib.load(open('pyproject.toml','rb'))['project']['dependencies'];bad=[d for d in deps if '>=' in d];assert not bad, f'unpinned deps: {bad}';print('pins OK:',deps)"
